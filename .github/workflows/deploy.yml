@@ -21,7 +21,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /home/elibrary/domains/autotechug.com/public_html/user/
+          server-dir: /
           local-dir: ./
           exclude: |
             **/.git*
