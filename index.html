@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AutoTech UG — Premium Auto Parts Uganda</title>
+<meta name="description" content="Uganda's trusted source for quality auto parts. Fast WhatsApp ordering. Nationwide delivery."/>
+<meta name="keywords" content="auto parts Uganda, car parts Kampala, Toyota parts Uganda, engine parts Uganda"/>
+<meta property="og:title" content="AutoTech UG — Premium Auto Parts Uganda"/>
+<meta property="og:description" content="Quality-tested parts for Japanese and European cars. Order via WhatsApp."/>
+<meta property="og:url" content="https://autotechug.com"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;600;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230C0F12'/%3E%3Crect width='32' height='32' rx='6' fill='%23FF6B00' opacity='.9'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='18' font-family='Arial' fill='white'%3E&#9881;%3C/text%3E%3C/svg%3E"/>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="header">
+  <div class="header-inner container">
+    <a href="index.html" class="logo">
+      <span class="logo-icon"><i class="fas fa-gear"></i></span>
+      <span class="logo-text">
+        <span class="logo-main">AUTO<span class="accent">TECH</span></span>
+        <span class="logo-sub">Uganda</span>
+      </span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#products">Shop</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-search" id="searchToggle" aria-label="Search"><i class="fas fa-search"></i></button>
+      <a href="https://wa.me/256757169673" class="btn-whatsapp" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="search-bar" id="searchBar">
+    <div class="container">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search auto parts, brands, part numbers…" autocomplete="off"/>
+      <button class="btn-close-search" id="closeSearch"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"><div class="hero-grid"></div></div>
+  <div class="container hero-content">
+    <div class="hero-badge"><i class="fas fa-bolt"></i> Fast WhatsApp Ordering</div>
+    <h1 class="hero-title">
+      Premium Auto<br/>
+      <span class="accent">Parts</span> &amp;<br/>
+      <span class="outline">Accessories</span>
+    </h1>
+    <p class="hero-sub">Quality-tested parts for Japanese &amp; European cars. Order now, delivered to your location anywhere in Uganda.</p>
+    <div class="hero-ctas">
+      <a href="#products" class="btn-primary"><i class="fas fa-th-large"></i> Browse Parts</a>
+      <a href="https://wa.me/256757169673" class="btn-outline" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Chat with Us</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" data-target="150">0</span><span>+</span><div class="stat-label">Parts in Stock</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num" data-target="5">0</span><span>★</span><div class="stat-label">Customer Rating</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num" data-target="24">0</span><span>h</span><div class="stat-label">Delivery Time</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll"><span></span></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span><i class="fas fa-check-circle"></i> Free delivery on orders above UGX 500,000</span>
+    <span><i class="fas fa-shield-halved"></i> 6-month warranty on all parts</span>
+    <span><i class="fab fa-whatsapp"></i> Instant WhatsApp ordering 24/7</span>
+    <span><i class="fas fa-truck-fast"></i> Nationwide delivery in Uganda</span>
+    <span><i class="fas fa-star"></i> OEM-quality tested parts</span>
+    <span><i class="fas fa-check-circle"></i> Free delivery on orders above UGX 500,000</span>
+    <span><i class="fas fa-shield-halved"></i> 6-month warranty on all parts</span>
+    <span><i class="fab fa-whatsapp"></i> Instant WhatsApp ordering 24/7</span>
+    <span><i class="fas fa-truck-fast"></i> Nationwide delivery in Uganda</span>
+    <span><i class="fas fa-star"></i> OEM-quality tested parts</span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories-section" id="categories">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label"><i class="fas fa-layer-group"></i> Browse By</div>
+      <h2>Part <span class="accent">Categories</span></h2>
+    </div>
+    <div class="categories-grid" id="categoriesGrid"></div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="products-header">
+      <div class="section-header">
+        <div class="section-label"><i class="fas fa-bolt"></i> Inventory</div>
+        <h2>All <span class="accent">Products</span></h2>
+      </div>
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-cat="all">All Parts</button>
+      </div>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+    <div class="load-more-wrap">
+      <button class="btn-load-more hidden" id="loadMoreBtn"><i class="fas fa-plus"></i> Load More Parts</button>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-label"><i class="fas fa-star"></i> Why AutoTech</div>
+      <h2>The AutoTech <span class="accent">Advantage</span></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-certificate"></i></div>
+        <h3>OEM-Quality Parts</h3>
+        <p>Every part is sourced from verified suppliers and tested to OEM specifications before reaching you.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fab fa-whatsapp"></i></div>
+        <h3>WhatsApp Ordering</h3>
+        <p>No complicated checkout. Order directly via WhatsApp. Get a quote and confirm in minutes.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-truck-fast"></i></div>
+        <h3>Nationwide Delivery</h3>
+        <p>From Kampala to Gulu, Mbarara to Mbale — we deliver to your doorstep across Uganda.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fas fa-shield-halved"></i></div>
+        <h3>6-Month Warranty</h3>
+        <p>All parts carry a minimum 6-month warranty. Defective parts? We replace, no questions asked.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="container about-inner">
+    <div class="about-visual">
+      <div class="about-icon-display">
+        <i class="fas fa-gear big-gear"></i>
+        <i class="fas fa-gear small-gear"></i>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-label"><i class="fas fa-info-circle"></i> About Us</div>
+      <h2>Uganda's Trusted<br/><span class="accent">Auto Parts</span> Dealer</h2>
+      <p>AutoTech UG is a Kampala-based auto parts supplier specialising in high-quality original and OEM-equivalent parts for Japanese and European vehicles. We stock everything from engine components to electrical parts, serving both individual car owners and garages across Uganda.</p>
+      <p>Our WhatsApp-first ordering system means you get fast, personal service — tell us your car model and the part you need, and we'll sort you out.</p>
+      <div class="about-contacts">
+        <a href="tel:+256757169673" class="contact-pill"><i class="fas fa-phone"></i> +256 757 169673</a>
+        <a href="tel:+256757469374" class="contact-pill"><i class="fas fa-phone"></i> +256 757 469374</a>
+        <a href="https://wa.me/256757169673" class="contact-pill whatsapp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-header centered">
+      <div class="section-label"><i class="fas fa-headset"></i> Get In Touch</div>
+      <h2>Order or <span class="accent">Enquire</span></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="cinfo-item">
+          <i class="fas fa-location-dot"></i>
+          <div><strong>Location</strong><span>Kampala, Uganda</span></div>
+        </div>
+        <div class="cinfo-item">
+          <i class="fas fa-phone"></i>
+          <div><strong>Phone</strong><span>+256 757 169673<br/>+256 757 469374</span></div>
+        </div>
+        <div class="cinfo-item">
+          <i class="fab fa-whatsapp"></i>
+          <div><strong>WhatsApp</strong><span>Available 7 days, 8am – 9pm</span></div>
+        </div>
+      </div>
+      <div class="contact-form-wrap">
+        <form class="enquiry-form" id="enquiryForm">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="orderName" placeholder="John Mukasa" required/>
+          </div>
+          <div class="form-group">
+            <label>Phone / WhatsApp</label>
+            <input type="tel" id="orderPhone" placeholder="+256 7XX XXX XXX" required/>
+          </div>
+          <div class="form-group">
+            <label>Your Location</label>
+            <input type="text" id="orderLocation" placeholder="Kampala, Ntinda" required/>
+          </div>
+          <div class="form-group">
+            <label>Part Needed</label>
+            <textarea id="orderMessage" rows="3" placeholder="Describe the part — include your car model and year for best match"></textarea>
+          </div>
+          <button type="submit" class="btn-primary full-width">
+            <i class="fab fa-whatsapp"></i> Send Enquiry via WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal-box order-modal-box">
+    <button class="modal-close" id="orderModalClose"><i class="fas fa-times"></i></button>
+    <div class="modal-content">
+      <div class="order-modal-header">
+        <i class="fab fa-whatsapp"></i>
+        <h3>Place Your Order</h3>
+        <p id="orderProductName" class="order-product-name"></p>
+      </div>
+      <form class="enquiry-form" id="orderForm">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" id="modalName" placeholder="John Mukasa" required/>
+        </div>
+        <div class="form-group">
+          <label>Phone / WhatsApp *</label>
+          <input type="tel" id="modalPhone" placeholder="+256 7XX XXX XXX" required/>
+        </div>
+        <div class="form-group">
+          <label>Delivery Location *</label>
+          <input type="text" id="modalLocation" placeholder="e.g. Kampala, Ntinda" required/>
+        </div>
+        <div class="form-group">
+          <label>Extra Notes</label>
+          <textarea id="modalNotes" rows="2" placeholder="Car model, year, any additional info…"></textarea>
+        </div>
+        <button type="submit" class="btn-primary full-width">
+          <i class="fab fa-whatsapp"></i> Send Order to WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">
+        <span class="logo-icon"><i class="fas fa-gear"></i></span>
+        <span class="logo-text">
+          <span class="logo-main">AUTO<span class="accent">TECH</span></span>
+          <span class="logo-sub">Uganda</span>
+        </span>
+      </a>
+      <p>Premium auto parts delivered fast across Uganda. Quality tested. WhatsApp ready.</p>
+      <div class="footer-socials">
+        <a href="https://wa.me/256757169673" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <a href="#products">All Products</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+      <a href="admin/">Admin Panel</a>
+    </div>
+    <div class="footer-links">
+      <h4>Popular Categories</h4>
+      <a href="#" onclick="filterCat('Engine Parts')">Engine Parts</a>
+      <a href="#" onclick="filterCat('Brakes')">Brakes &amp; Suspension</a>
+      <a href="#" onclick="filterCat('Electrical')">Electrical</a>
+      <a href="#" onclick="filterCat('Cooling System')">Cooling System</a>
+      <a href="#" onclick="filterCat('Transmission')">Transmission</a>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+      <div class="footer-cinfo"><i class="fas fa-phone"></i> +256 757 169673</div>
+      <div class="footer-cinfo"><i class="fas fa-phone"></i> +256 757 469374</div>
+      <div class="footer-cinfo"><i class="fas fa-location-dot"></i> Kampala, Uganda</div>
+      <div class="footer-cinfo"><i class="fas fa-clock"></i> Mon–Sat: 8am – 9pm</div>
+    </div>
+  </div>
+  <div class="footer-bottom container">
+    <span>&copy; 2025 AutoTech UG. All rights reserved.</span>
+    <span>autotechug.com</span>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/256757169673" class="float-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

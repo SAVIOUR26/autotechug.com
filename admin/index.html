@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Admin — AutoTech UG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="admin.css"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23FF6B00'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='18' font-family='Arial' fill='white'%3E&#9881;%3C/text%3E%3C/svg%3E"/>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-header">
+    <div class="logo">
+      <div class="logo-icon"><i class="fas fa-gear"></i></div>
+      <div class="logo-text">
+        <span class="logo-main">AUTO<span class="acc">TECH</span></span>
+        <span class="logo-sub">Admin Panel</span>
+      </div>
+    </div>
+    <button class="sb-close" id="sbClose"><i class="fas fa-times"></i></button>
+  </div>
+  <nav class="sb-nav">
+    <div class="nav-label">Main</div>
+    <a href="#" class="nav-item active" data-section="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a>
+    <a href="#" class="nav-item" data-section="products"><i class="fas fa-boxes-stacked"></i> Products</a>
+    <a href="#" class="nav-item" data-section="add-product"><i class="fas fa-plus-circle"></i> Add Product</a>
+    <div class="nav-label">Settings</div>
+    <a href="#" class="nav-item" data-section="settings"><i class="fas fa-sliders"></i> Store Settings</a>
+    <a href="../index.html" class="nav-item" target="_blank"><i class="fas fa-store"></i> View Store</a>
+  </nav>
+  <div class="sb-footer">
+    <div class="admin-user">
+      <div class="avatar"><i class="fas fa-user"></i></div>
+      <div>
+        <div class="admin-name">Store Admin</div>
+        <div class="admin-role">AutoTech UG</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main-wrap" id="mainWrap">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    <div class="topbar-title" id="topbarTitle">Dashboard</div>
+    <a href="../index.html" class="topbar-btn" target="_blank"><i class="fas fa-store"></i> View Store</a>
+  </header>
+
+  <!-- ═══════════ DASHBOARD ═══════════ -->
+  <section class="section active" id="sec-dashboard">
+    <div class="sec-title">
+      <h2>Overview <span class="acc">Dashboard</span></h2>
+      <p>Your store at a glance</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-boxes-stacked"></i></div>
+        <div><div class="stat-val" id="dTotal">0</div><div class="stat-lbl">Total Products</div></div>
+      </div>
+      <div class="stat-card acc-card">
+        <div class="stat-icon"><i class="fas fa-tags"></i></div>
+        <div><div class="stat-val" id="dCats">0</div><div class="stat-lbl">Categories</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-image"></i></div>
+        <div><div class="stat-val" id="dImages">0</div><div class="stat-lbl">With Images</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-triangle-exclamation"></i></div>
+        <div><div class="stat-val" id="dNoImg">0</div><div class="stat-lbl">No Image Yet</div></div>
+      </div>
+    </div>
+    <div class="dash-grid">
+      <div class="dash-card">
+        <div class="dash-hdr"><h3>Latest Products</h3><button class="sm-btn" onclick="nav('products')">View All</button></div>
+        <table class="mini-tbl" id="recentTbl">
+          <thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Image</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="dash-card">
+        <div class="dash-hdr"><h3>By Category</h3></div>
+        <div class="cat-bars" id="catBars"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PRODUCTS ═══════════ -->
+  <section class="section" id="sec-products">
+    <div class="sec-title">
+      <h2>Manage <span class="acc">Products</span></h2>
+      <p>Edit, upload images, or remove products</p>
+    </div>
+    <div class="toolbar">
+      <div class="search-wrap">
+        <i class="fas fa-search"></i>
+        <input type="text" id="pSearch" placeholder="Search products…"/>
+      </div>
+      <select id="pCatFilter" class="sel">
+        <option value="all">All Categories</option>
+      </select>
+      <button class="btn-acc-sm" onclick="nav('add-product')"><i class="fas fa-plus"></i> Add Product</button>
+    </div>
+    <div class="prod-grid" id="adminGrid"></div>
+  </section>
+
+  <!-- ═══════════ ADD / EDIT PRODUCT ═══════════ -->
+  <section class="section" id="sec-add-product">
+    <div class="sec-title">
+      <h2 id="formTitle">Add <span class="acc">Product</span></h2>
+      <p id="formSub">Fill in the product details below</p>
+    </div>
+    <form class="pform" id="productForm">
+      <input type="hidden" id="fpId"/>
+      <div class="form-row">
+        <div class="fg">
+          <label>Product Name *</label>
+          <input type="text" id="fpName" placeholder="e.g. Brake Pads Toyota Corolla" required/>
+        </div>
+        <div class="fg">
+          <label>Category *</label>
+          <input type="text" id="fpCat" placeholder="e.g. Brakes" required list="catList"/>
+          <datalist id="catList"></datalist>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="fg">
+          <label>Price *</label>
+          <input type="number" id="fpPrice" placeholder="85000" min="0" required/>
+        </div>
+        <div class="fg">
+          <label>Currency</label>
+          <select id="fpCurrency">
+            <option value="UGX">UGX — Ugandan Shilling</option>
+            <option value="USD">USD — US Dollar</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg">
+        <label>Description</label>
+        <textarea id="fpDesc" rows="4" placeholder="Describe the part, compatibility, warranty, specifications…"></textarea>
+      </div>
+      <div class="fg">
+        <label>WhatsApp Order Number</label>
+        <select id="fpPhone">
+          <option value="256757169673">+256 757 169673</option>
+          <option value="256757469374">+256 757 469374</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Product Image</label>
+        <div class="upload-area" id="uploadArea">
+          <div id="uploadPlaceholder">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span>Click to upload or drag &amp; drop</span>
+            <span class="hint">PNG, JPG up to 5MB</span>
+          </div>
+          <img id="imgPreview" src="" alt="" style="display:none"/>
+          <button type="button" id="removeImg" style="display:none"><i class="fas fa-times"></i> Remove</button>
+        </div>
+        <input type="file" id="fpImage" accept="image/*" style="display:none"/>
+        <div class="fg-hint">Images can be added after initial setup. Products without images show a placeholder icon.</div>
+      </div>
+      <div class="form-btns">
+        <button type="button" class="btn-cancel" id="formCancel">Cancel</button>
+        <button type="submit" class="btn-save"><i class="fas fa-save"></i> Save Product</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ═══════════ SETTINGS ═══════════ -->
+  <section class="section" id="sec-settings">
+    <div class="sec-title">
+      <h2>Store <span class="acc">Settings</span></h2>
+      <p>Configure your store details</p>
+    </div>
+    <form class="pform" id="settingsForm">
+      <div class="form-row">
+        <div class="fg"><label>Store Name</label><input type="text" id="sName" value="AutoTech UG"/></div>
+        <div class="fg"><label>Domain</label><input type="text" id="sDomain" value="autotechug.com"/></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Primary WhatsApp</label><input type="text" id="sWA1" value="+256 757 169673"/></div>
+        <div class="fg"><label>Secondary WhatsApp</label><input type="text" id="sWA2" value="+256 757 469374"/></div>
+      </div>
+      <div class="fg">
+        <label>Store Description</label>
+        <textarea id="sDesc" rows="3">Uganda's trusted source for quality auto parts. Order directly via WhatsApp.</textarea>
+      </div>
+      <div class="form-btns">
+        <button type="submit" class="btn-save"><i class="fas fa-save"></i> Save Settings</button>
+      </div>
+    </form>
+
+    <div class="export-box">
+      <h3><i class="fas fa-download"></i> Export Products</h3>
+      <p>Download your product database. After updating products, export and replace <code>js/products.js</code> then re-deploy.</p>
+      <div class="export-btns">
+        <button class="btn-export" id="exportJSON"><i class="fas fa-file-code"></i> Export products.js</button>
+        <button class="btn-export" id="exportCSV"><i class="fas fa-file-csv"></i> Export CSV</button>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /main-wrap -->
+
+<!-- DELETE MODAL -->
+<div class="modal-ov" id="deleteModal">
+  <div class="del-box">
+    <i class="fas fa-triangle-exclamation"></i>
+    <h3>Delete Product?</h3>
+    <p id="delMsg">This cannot be undone.</p>
+    <div class="del-btns">
+      <button class="btn-cancel" id="delCancel">Cancel</button>
+      <button class="btn-del-confirm" id="delConfirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="../js/products.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
