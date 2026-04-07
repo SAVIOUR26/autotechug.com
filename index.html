@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;600;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <link rel="stylesheet" href="css/style.css"/>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230C0F12'/%3E%3Crect width='32' height='32' rx='6' fill='%23FF6B00' opacity='.9'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='18' font-family='Arial' fill='white'%3E&#9881;%3C/text%3E%3C/svg%3E"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230C0F12'/%3E%3Crect width='32' height='32' rx='6' fill='%231D8CF8' opacity='.9'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='18' font-family='Arial' fill='white'%3E&#9881;%3C/text%3E%3C/svg%3E"/>
 </head>
 <body>
 
@@ -55,24 +55,45 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"><div class="hero-grid"></div></div>
+
+  <!-- Floating auto parts icons -->
+  <div class="hero-floats" aria-hidden="true">
+    <i class="fas fa-gear float-icon fi-1"></i>
+    <i class="fas fa-wrench float-icon fi-2"></i>
+    <i class="fas fa-oil-can float-icon fi-3"></i>
+    <i class="fas fa-bolt float-icon fi-4"></i>
+    <i class="fas fa-screwdriver-wrench float-icon fi-5"></i>
+    <i class="fas fa-gauge-high float-icon fi-6"></i>
+    <i class="fas fa-filter float-icon fi-7"></i>
+    <i class="fas fa-car-battery float-icon fi-8"></i>
+    <i class="fas fa-gear float-icon fi-9"></i>
+    <i class="fas fa-wrench float-icon fi-10"></i>
+  </div>
+
   <div class="container hero-content">
-    <div class="hero-badge"><i class="fas fa-bolt"></i> Fast WhatsApp Ordering</div>
-    <h1 class="hero-title">
-      Premium Auto<br/>
-      <span class="accent">Parts</span> &amp;<br/>
-      <span class="outline">Accessories</span>
-    </h1>
-    <p class="hero-sub">Quality-tested parts for Japanese &amp; European cars. Order now, delivered to your location anywhere in Uganda.</p>
-    <div class="hero-ctas">
-      <a href="#products" class="btn-primary"><i class="fas fa-th-large"></i> Browse Parts</a>
-      <a href="https://wa.me/256757169673" class="btn-outline" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Chat with Us</a>
+    <!-- Left: headline -->
+    <div class="hero-left">
+      <div class="hero-badge"><i class="fas fa-bolt"></i> Fast WhatsApp Ordering</div>
+      <h1 class="hero-title">
+        Premium Auto<br/>
+        <span class="accent">Parts</span> &amp;<br/>
+        <span class="outline">Accessories</span>
+      </h1>
+      <p class="hero-sub">Quality-tested parts for Japanese &amp; European cars. Order now, delivered to your location anywhere in Uganda.</p>
     </div>
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num" data-target="150">0</span><span>+</span><div class="stat-label">Parts in Stock</div></div>
-      <div class="stat-divider"></div>
-      <div class="stat"><span class="stat-num" data-target="5">0</span><span>★</span><div class="stat-label">Customer Rating</div></div>
-      <div class="stat-divider"></div>
-      <div class="stat"><span class="stat-num" data-target="24">0</span><span>h</span><div class="stat-label">Delivery Time</div></div>
+    <!-- Right: CTAs + stats -->
+    <div class="hero-right">
+      <div class="hero-ctas">
+        <a href="#products" class="btn-primary"><i class="fas fa-th-large"></i> Browse Parts</a>
+        <a href="https://wa.me/256757169673" class="btn-outline" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Chat with Us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" data-target="150">0</span><span>+</span><div class="stat-label">Parts in Stock</div></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" data-target="5">0</span><span>★</span><div class="stat-label">Customer Rating</div></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" data-target="24">0</span><span>h</span><div class="stat-label">Delivery Time</div></div>
+      </div>
     </div>
   </div>
   <div class="hero-scroll"><span></span></div>
