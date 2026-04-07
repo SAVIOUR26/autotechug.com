@@ -1,40 +1,29 @@
 /**
- * AutoTech UG — WhatsApp Catalog Scraper
- * ----------------------------------------
- * Fetches each wa.me/p/ product link and extracts:
- *   name, description, price, image, category (guessed)
+ * AutoTech UG — WhatsApp Catalog Scraper (curl-based)
+ * -----------------------------------------------------
+ * Fetches each wa.me/p/ product link via curl (follows redirect to
+ * whatsapp.com/product/...) and extracts name, image, description.
  *
  * Usage:
  *   node scraper/scrape.js
  *
  * Output:
- *   scraper/scraped_products.json  — raw results
+ *   scraper/scraped_products.json  — raw results for review
  *   js/products.js                 — ready to deploy
- *
- * Requirements:
- *   npm install node-fetch cheerio  (run once inside /scraper)
  */
 
+const { execSync } = require('child_process');
 const fs   = require('fs');
 const path = require('path');
 
-// ── Try to load dependencies ───────────────────────────────────
-let fetch, cheerio;
-try {
-  fetch   = (...a) => import('node-fetch').then(m => m.default(...a));
-  cheerio = require('cheerio');
-} catch {
-  console.error('\n  Missing dependencies. Run:\n\n    cd scraper && npm install node-fetch cheerio\n');
-  process.exit(1);
-}
-
 // ── Config ─────────────────────────────────────────────────────
-const DELAY_MS    = 800;   // polite delay between requests
-const TIMEOUT_MS  = 12000;
-const OUT_JSON    = path.join(__dirname, 'scraped_products.json');
-const OUT_JS      = path.join(__dirname, '..', 'js', 'products.js');
+const DELAY_MS   = 400;
+const TIMEOUT_S  = 14;
+const OUT_JSON   = path.join(__dirname, 'scraped_products.json');
+const OUT_JS     = path.join(__dirname, '..', 'js', 'products.js');
+const IMG_DIR    = path.join(__dirname, '..', 'images', 'products');
 
-// ── Load links from both txt files ────────────────────────────
+// ── Load links ─────────────────────────────────────────────────
 function loadLinks() {
   const files = [
     path.join(__dirname, '..', '256757169673.txt'),
@@ -43,117 +32,136 @@ function loadLinks() {
   const seen = new Set();
   const links = [];
   for (const f of files) {
-    if (!fs.existsSync(f)) { console.warn(`  ⚠ File not found: ${f}`); continue; }
-    const lines = fs.readFileSync(f, 'utf8').split('\n').map(l => l.trim()).filter(Boolean);
-    for (const url of lines) {
+    if (!fs.existsSync(f)) { console.warn(`  ⚠ Not found: ${f}`); continue; }
+    fs.readFileSync(f, 'utf8').split('\n').map(l => l.trim()).filter(Boolean).forEach(url => {
       if (url.startsWith('https://wa.me/p/') && !seen.has(url)) {
         seen.add(url);
         links.push(url);
       }
-    }
+    });
   }
   return links;
 }
 
-// ── Category guesser ──────────────────────────────────────────
+// ── Category guesser ───────────────────────────────────────────
 const CAT_RULES = [
-  [/brak|pad|disc|rotor/i,          'Brakes'],
+  [/cctv|camera|security/i,                           'Electronics'],
+  [/brak|pad|disc|rotor/i,                            'Brakes'],
   [/engine|piston|valve|camshaft|crankshaft|gasket|timing/i, 'Engine Parts'],
   [/battery|alternator|starter|fuse|relay|wire|bulb|sensor/i,'Electrical'],
-  [/filter|oil filter|air filter|fuel filter/i, 'Filters'],
-  [/shock|strut|spring|bushing|arm|suspen/i,   'Suspension'],
-  [/gearbox|transmis|clutch|diff/i,            'Transmission'],
+  [/filter|oil filter|air filter|fuel filter/i,       'Filters'],
+  [/shock|strut|spring|bushing|arm|suspen/i,          'Suspension'],
+  [/gearbox|transmis|clutch|diff/i,                   'Transmission'],
   [/radiator|coolant|thermostat|water pump|cooling/i, 'Cooling System'],
-  [/fuel pump|injector|carburetor|fuel/i,      'Fuel System'],
-  [/steering|rack|pump|tie rod/i,              'Steering'],
-  [/exhaust|muffler|catalytic/i,               'Exhaust'],
-  [/ac|compressor|condenser|air con/i,         'Air Conditioning'],
-  [/drive shaft|axle|cv joint|propeller/i,     'Drivetrain'],
-  [/camera|screen|display|bluetooth|radio|stereo/i, 'Electronics'],
+  [/fuel pump|injector|carburetor|fuel/i,             'Fuel System'],
+  [/steering|rack|pump|tie rod/i,                     'Steering'],
+  [/exhaust|muffler|catalytic/i,                      'Exhaust'],
+  [/ac |compressor|condenser|air con/i,               'Air Conditioning'],
+  [/drive shaft|axle|cv joint/i,                      'Drivetrain'],
+  [/tyre|tire|rim|wheel/i,                            'Tyres & Wheels'],
+  [/lamp|light|headlight|tail/i,                      'Lighting'],
+  [/mirror|wiper|body|bumper|panel|door/i,            'Body Parts'],
+  [/oil|lubric|grease/i,                              'Oils & Lubricants'],
 ];
 function guessCategory(text) {
-  if (!text) return 'Auto Parts';
   for (const [re, cat] of CAT_RULES) {
     if (re.test(text)) return cat;
   }
   return 'Auto Parts';
 }
 
-// ── Extract price from text ────────────────────────────────────
+// ── Extract price ──────────────────────────────────────────────
 function extractPrice(text) {
-  if (!text) return null;
-  // Match patterns like: UGX 45,000 | 45000 | 45,000 UGX | $45 | USh 45000
-  const m = text.match(/(?:UGX|USh|Ush|ugx)[\s,]*([0-9][0-9,\s.]+)|([0-9][0-9,]+)[\s]*(?:UGX|ugx|USh)/i)
-           || text.match(/([0-9]{4,})/);
-  if (m) {
-    const raw = (m[1] || m[2] || m[0]).replace(/[,\s]/g, '');
-    const n   = parseInt(raw, 10);
-    return isNaN(n) ? null : n;
-  }
-  return null;
+  if (!text) return 0;
+  const m = text.match(/(?:UGX|USh|Ush)[\s]*([0-9][0-9,]+)|([0-9]{4,})/i);
+  if (m) { const n = parseInt((m[1]||m[2]).replace(/,/g,''),10); return isNaN(n)?0:n; }
+  return 0;
 }
 
-// ── Fetch one product ─────────────────────────────────────────
-async function fetchProduct(url, index) {
-  const headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Accept-Language': 'en-US,en;q=0.9',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+// ── Parse meta content values from HTML ───────────────────────
+function parseMeta(html) {
+  const get = (prop) => {
+    const patterns = [
+      new RegExp(`<meta[^>]+property=["']og:${prop}["'][^>]+content=["']([^"']+)["']`,'i'),
+      new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:${prop}["']`,'i'),
+      new RegExp(`<meta[^>]+name=["']${prop}["'][^>]+content=["']([^"']+)["']`,'i'),
+    ];
+    for (const re of patterns) {
+      const m = html.match(re);
+      if (m) return m[1].replace(/&amp;/g,'&').replace(/&#039;/g,"'").replace(/&quot;/g,'"').trim();
+    }
+    return '';
   };
 
-  const ctrl    = new AbortController();
-  const timer   = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
+  // Also grab all content= values in order for fallback
+  const allContent = [];
+  const re = /content="([^"]{10,})"/g;
+  let m;
+  while ((m = re.exec(html)) !== null) allContent.push(m[1]);
+
+  const title = get('title') || (html.match(/<title[^>]*>([^<]+)</i)||[])[1] || '';
+  const desc  = get('description') || allContent.find(c => c.length > 30 && !c.startsWith('http') && !c.includes('URL=')) || '';
+  const image = get('image') || allContent.find(c => c.startsWith('https://scontent') || c.startsWith('https://z-p')) || '';
+
+  return { title, desc, image };
+}
+
+// ── Clean product name (remove "on WhatsApp" suffix etc.) ──────
+function cleanName(raw) {
+  return raw
+    .replace(/\s+from\s+.+?\s+on\s+WhatsApp\.?$/i, '')
+    .replace(/\s+on\s+WhatsApp\.?$/i, '')
+    .replace(/WhatsApp\.?$/i, '')
+    .replace(/\.$/, '')
+    .trim();
+}
+
+// ── Download image ─────────────────────────────────────────────
+function downloadImage(url, filename) {
+  if (!url || !filename) return false;
+  try {
+    const dest = path.join(IMG_DIR, filename);
+    execSync(`curl -sL --max-time 20 "${url}" -o "${dest}"`, { timeout: 25000 });
+    const size = fs.existsSync(dest) ? fs.statSync(dest).size : 0;
+    if (size < 1000) { fs.unlinkSync(dest); return false; } // too small = likely error page
+    return true;
+  } catch { return false; }
+}
+
+// ── Fetch one product via curl ─────────────────────────────────
+function fetchProduct(url, index) {
+  const parts     = url.split('/');
+  const productId = parts[parts.length - 2];
+  const phone     = parts[parts.length - 1];
 
   try {
-    const res  = await fetch(url, { headers, signal: ctrl.signal, redirect: 'follow' });
-    clearTimeout(timer);
-    const html = await res.text();
-    const $    = cheerio.load(html);
+    const html = execSync(
+      `curl -sL --max-time ${TIMEOUT_S} -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" "${url}"`,
+      { timeout: (TIMEOUT_S + 3) * 1000, maxBuffer: 1024 * 512 }
+    ).toString();
 
-    const get = (prop) => $(`meta[property="og:${prop}"]`).attr('content')
-                       || $(`meta[name="og:${prop}"]`).attr('content')
-                       || $(`meta[name="${prop}"]`).attr('content')
-                       || '';
-
-    const name  = get('title')       || $('title').text().replace(/\s*[|\-].*$/, '').trim();
-    const desc  = get('description') || $('meta[name="description"]').attr('content') || '';
-    const image = get('image')       || '';
-    const price = extractPrice(desc) || extractPrice(name);
-
-    const parts = url.split('/');
-    const productId = parts[parts.length - 2] || parts[parts.length - 1];
-    const phone     = parts[parts.length - 1];
-
+    const { title, desc, image } = parseMeta(html);
+    const name     = cleanName(title) || `Product ${index + 1}`;
+    const price    = extractPrice(desc) || extractPrice(name);
     const category = guessCategory(name + ' ' + desc);
 
-    return {
-      id:          `wa_${productId}`,
-      name:        name || `Product ${index + 1}`,
-      description: desc,
-      price:       price || 0,
-      currency:    'UGX',
-      category,
-      image:       '',           // filename (to be added manually or via download)
-      imageUrl:    image,        // original URL from OG meta (may be usable)
-      phone:       phone.replace(/\D/g, ''),
-      waLink:      url,
-      _scraped:    true,
-    };
+    // Download image
+    let imgFile = '';
+    if (image) {
+      imgFile = `${productId}.jpg`;
+      const ok = downloadImage(image, imgFile);
+      if (!ok) imgFile = '';
+    }
+
+    return { id: productId, name, description: desc, price, currency: 'UGX', category, image: imgFile, imageUrl: image, phone, waLink: url, _ok: true };
   } catch (err) {
-    clearTimeout(timer);
-    return {
-      id:       `wa_err_${index}`,
-      name:     `[Failed] ${url}`,
-      waLink:   url,
-      error:    err.message,
-      _scraped: false,
-    };
+    return { id: `err_${index}`, name: '', waLink: url, error: err.message.slice(0, 80), _ok: false };
   }
 }
 
-// ── Format products.js output ─────────────────────────────────
+// ── Format products.js ─────────────────────────────────────────
 function formatProductsJS(products) {
-  const clean = products.filter(p => p._scraped && p.name && !p.name.startsWith('[Failed]'));
+  const clean = products.filter(p => p._ok && p.name);
   const lines = clean.map((p, i) => `  {
     id:          '${String(i + 1).padStart(3, '0')}',
     name:        ${JSON.stringify(p.name)},
@@ -161,14 +169,13 @@ function formatProductsJS(products) {
     price:       ${p.price || 0},
     currency:    'UGX',
     category:    ${JSON.stringify(p.category)},
-    image:       '',
+    image:       ${JSON.stringify(p.image || '')},
     phone:       '${p.phone || '256757169673'}',
     waLink:      ${JSON.stringify(p.waLink)},
   }`);
 
   return `/* AUTO-GENERATED by scraper/scrape.js — ${new Date().toISOString()} */
-/* Total products: ${clean.length} */
-/* To update: run the scraper again and re-deploy */
+/* Products: ${clean.length} */
 
 const PRODUCTS = [
 ${lines.join(',\n')}
@@ -176,43 +183,39 @@ ${lines.join(',\n')}
 `;
 }
 
-// ── Main ──────────────────────────────────────────────────────
-async function main() {
+// ── Main ───────────────────────────────────────────────────────
+function main() {
+  if (!fs.existsSync(IMG_DIR)) fs.mkdirSync(IMG_DIR, { recursive: true });
+
   const links = loadLinks();
   console.log(`\n  AutoTech UG — WhatsApp Catalog Scraper`);
-  console.log(`  Found ${links.length} unique product links\n`);
+  console.log(`  ${links.length} unique product links found\n`);
 
   const results = [];
   for (let i = 0; i < links.length; i++) {
-    const url = links[i];
-    process.stdout.write(`  [${String(i + 1).padStart(3, '0')}/${links.length}] Fetching… `);
-    const product = await fetchProduct(url, i);
-    results.push(product);
-
-    const ok = product._scraped && !product.error;
-    console.log(ok ? `✅  ${product.name.slice(0, 55)}` : `❌  ${product.error || 'unknown error'}`);
-
-    if (i < links.length - 1) await new Promise(r => setTimeout(r, DELAY_MS));
+    process.stdout.write(`  [${String(i+1).padStart(3,'0')}/${links.length}] `);
+    const p = fetchProduct(links[i], i);
+    results.push(p);
+    console.log(p._ok ? `✅  ${p.name.padEnd(45,' ')} | ${p.category} | img:${p.image?'yes':'no '}` : `❌  ${p.error}`);
+    if (i < links.length - 1) {
+      const start = Date.now();
+      while (Date.now() - start < DELAY_MS) {} // sync delay
+    }
   }
 
-  // Save raw JSON
   fs.writeFileSync(OUT_JSON, JSON.stringify(results, null, 2));
-  console.log(`\n  Raw results → ${OUT_JSON}`);
-
-  // Save products.js
   const js = formatProductsJS(results);
   fs.writeFileSync(OUT_JS, js);
-  console.log(`  products.js  → ${OUT_JS}`);
 
-  const ok  = results.filter(r => r._scraped && !r.error).length;
+  const ok  = results.filter(r => r._ok).length;
+  const img = results.filter(r => r.image).length;
   const err = results.length - ok;
-  console.log(`\n  ✅ Success: ${ok}   ❌ Failed: ${err}\n`);
-
-  if (err > 0) {
-    console.log('  Failed links (may need manual entry):');
-    results.filter(r => r.error).forEach(r => console.log(`    ${r.waLink}`));
-    console.log();
-  }
+  console.log(`\n  ── Results ───────────────────────────────`);
+  console.log(`  ✅ Scraped:  ${ok}/${links.length}`);
+  console.log(`  🖼  Images:  ${img}/${ok}`);
+  console.log(`  ❌ Failed:   ${err}`);
+  console.log(`  → scraper/scraped_products.json`);
+  console.log(`  → js/products.js\n`);
 }
 
-main().catch(console.error);
+main();
