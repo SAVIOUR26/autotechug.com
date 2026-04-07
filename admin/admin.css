@@ -171,6 +171,25 @@ input,textarea,select{font-family:inherit;font-size:14px}
 .btn-del-confirm{padding:10px 24px;background:var(--red);color:#fff;font-size:14px;font-weight:700;border-radius:var(--r);cursor:pointer;border:none;transition:var(--trans)}
 .btn-del-confirm:hover{opacity:.85}
 
+/* ── Login screen ────────────────────────────────── */
+.login-screen{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px}
+.login-screen.hidden{display:none}
+.login-card{width:100%;max-width:400px;background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:40px 36px}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.login-title{font-family:var(--fd);font-size:1.8rem;font-weight:800;margin-bottom:6px}
+.login-sub{font-size:13px;color:var(--text3);margin-bottom:24px}
+.login-form{display:flex;flex-direction:column;gap:16px}
+.pw-wrap{position:relative;display:flex;align-items:center}
+.pw-wrap input{flex:1;padding-right:42px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:11px 42px 11px 14px;color:var(--text);outline:none;transition:var(--trans);font-size:14px;width:100%}
+.pw-wrap input:focus{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc-dim)}
+.pw-toggle{position:absolute;right:12px;color:var(--text3);font-size:14px;transition:var(--trans)}
+.pw-toggle:hover{color:var(--text)}
+.login-error{font-size:13px;color:var(--red);min-height:18px;display:none}
+.login-error.show{display:block}
+.btn-save.full-w{width:100%;justify-content:center;padding:13px}
+.btn-logout{display:flex;align-items:center;gap:8px;margin-top:12px;padding:8px 12px;width:100%;font-size:13px;font-weight:600;color:var(--text3);background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);transition:var(--trans);cursor:pointer}
+.btn-logout:hover{border-color:var(--red);color:var(--red)}
+
 /* ── Toast ───────────────────────────────────────── */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg4);border:1px solid var(--border2);border-radius:10px;padding:12px 22px;font-size:14px;font-weight:600;color:var(--text);opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:999;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
