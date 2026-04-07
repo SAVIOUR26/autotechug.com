@@ -3,6 +3,76 @@
  * Full CRUD: Add, Edit, Delete, Image Upload, Export
  * Persistence: localStorage (export to sync with live site)
  */
+
+/* ── Auth ─────────────────────────────────────────────────────── */
+(function () {
+  const HASH = '311dd86684a13e4da76ea1661658c1c60d71c94a1636a23d1c2ef846302ebcd3'; // AutoTech2025
+  const SESSION_KEY = 'atug_auth';
+
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  const screen  = document.getElementById('loginScreen');
+  const form    = document.getElementById('loginForm');
+  const pwInput = document.getElementById('loginPw');
+  const toggle  = document.getElementById('pwToggle');
+  const errEl   = document.getElementById('loginError');
+  const loginBtn = document.getElementById('loginBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+
+  function showError(msg) {
+    errEl.textContent = msg;
+    errEl.classList.add('show');
+    pwInput.style.borderColor = 'var(--red)';
+  }
+  function clearError() {
+    errEl.classList.remove('show');
+    pwInput.style.borderColor = '';
+  }
+
+  // Check existing session
+  if (sessionStorage.getItem(SESSION_KEY) === '1') {
+    screen.classList.add('hidden');
+  }
+
+  // Toggle password visibility
+  toggle.addEventListener('click', () => {
+    const show = pwInput.type === 'password';
+    pwInput.type = show ? 'text' : 'password';
+    toggle.innerHTML = show ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+  });
+
+  // Login submit
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearError();
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying…';
+    const hash = await sha256(pwInput.value);
+    if (hash === HASH) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      screen.classList.add('hidden');
+    } else {
+      showError('Incorrect password. Please try again.');
+      pwInput.value = '';
+      pwInput.focus();
+    }
+    loginBtn.disabled = false;
+    loginBtn.innerHTML = '<i class="fas fa-unlock"></i> Sign In';
+  });
+
+  // Logout
+  logoutBtn.addEventListener('click', () => {
+    sessionStorage.removeItem(SESSION_KEY);
+    location.reload();
+  });
+
+  pwInput.addEventListener('input', clearError);
+})();
+
+/* ── Dashboard ────────────────────────────────────────────────── */
 (function () {
   'use strict';
 
