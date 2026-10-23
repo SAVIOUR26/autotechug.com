@@ -1,5 +1,5 @@
 /**
- * AutoTech UG — Products Data
+ * OUTO TECH UG — Products Data
  * ─────────────────────────────────────────────────────────────────
  * HOW TO UPDATE:
  *   1. Admin Panel → Settings → Export JSON

@@ -1,5 +1,5 @@
 /**
- * AutoTech UG — Admin Dashboard JavaScript
+ * OUTO TECH UG — Admin Dashboard JavaScript
  * Full CRUD: Add, Edit, Delete, Image Upload, Export
  * Persistence: localStorage (export to sync with live site)
  */
@@ -414,7 +414,7 @@
   /* ── Export ─────────────────────────────────────────────────── */
   $('exportJSON').addEventListener('click', () => {
     const clean = prods.map(({ _blob, ...rest }) => rest);
-    const js = `/**\n * AutoTech UG — Products Data (exported ${new Date().toLocaleDateString()})\n */\n\nconst PRODUCTS = ${JSON.stringify(clean, null, 2)};\n\nconst CATEGORY_ICONS = ${JSON.stringify(CATEGORY_ICONS, null, 2)};\n`;
+    const js = `/**\n * OUTO TECH UG — Products Data (exported ${new Date().toLocaleDateString()})\n */\n\nconst PRODUCTS = ${JSON.stringify(clean, null, 2)};\n\nconst CATEGORY_ICONS = ${JSON.stringify(CATEGORY_ICONS, null, 2)};\n`;
     dlFile('products.js', js, 'text/javascript');
     toast('products.js exported — replace in js/ folder & redeploy');
   });
