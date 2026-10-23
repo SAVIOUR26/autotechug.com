@@ -76,7 +76,7 @@
 (function () {
   'use strict';
 
-  const STORE_KEY = 'atug_products_v2';
+  const STORE_KEY = 'atug_products_v3';
 
   /* ── Load data ──────────────────────────────────────────────── */
   function load() {
@@ -95,7 +95,7 @@
 
   /* ── Helpers ────────────────────────────────────────────────── */
   const $ = id => document.getElementById(id);
-  function fmt(p) { return Number(p).toLocaleString('en-UG'); }
+  function fmt(p) { return p === '' || p == null ? 'On request' : Number(p).toLocaleString('en-UG'); }
   function cats()  {
     const m = {};
     prods.forEach(p => { const c = p.category || 'General'; m[c] = (m[c] || 0) + 1; });
@@ -162,7 +162,7 @@
       tr.innerHTML = `
         <td class="td-name">${p.name}</td>
         <td>${p.category || '—'}</td>
-        <td class="td-price">UGX ${fmt(p.price)}</td>
+        <td class="td-price">${p.price ? 'UGX ' : ''}${fmt(p.price)}</td>
         <td><span class="img-badge ${p.image ? 'img-yes' : 'img-no'}">${p.image ? 'Yes' : 'No'}</span></td>`;
       tbody.appendChild(tr);
     });
@@ -232,7 +232,7 @@
         <div class="apc-body">
           <div class="apc-cat">${p.category || 'General'}</div>
           <div class="apc-name">${p.name}</div>
-          <div class="apc-price">UGX ${fmt(p.price)}</div>
+          <div class="apc-price">${p.price ? 'UGX ' : ''}${fmt(p.price)}</div>
         </div>
         <div class="apc-btns">
           <button class="apc-btn apc-edit" data-id="${p.id}"><i class="fas fa-pen"></i> Edit</button>
