@@ -2,231 +2,247 @@
  * AutoTech UG — Products Data
  * ─────────────────────────────────────────────────────────────────
  * HOW TO UPDATE:
- *   1. Run scraper/scrape_catalog.py to get real product data
- *   2. Or: Admin Panel → Settings → Export JSON
- *   3. Replace the PRODUCTS array below with your real data
- *   4. Re-deploy via FTP
+ *   1. Admin Panel → Settings → Export JSON
+ *   2. Replace the PRODUCTS array below with your data
+ *   3. Re-deploy via FTP
+ *
+ * FIELDS:
+ *   price     — number as text, e.g. "340000". Leave "" to show "Price on request".
+ *   priceFrom — optional true to show "From UGX …" (several sizes/options)
+ *   image   — main photo in images/products/
+ *   gallery — optional extra photos shown in the product popup
  * ─────────────────────────────────────────────────────────────────
  */
 
 const PRODUCTS = [
+  /* ── SECURITY SYSTEMS ─────────────────────────────────────── */
   {
-    "id": "p001",
-    "name": "Car Battery 12V 60Ah",
-    "price": "180000",
+    "id": "s001",
+    "name": "GPS Tracker — Cars, Motorcycles & Trucks",
+    "price": "",
     "currency": "UGX",
-    "description": "Heavy duty maintenance-free car battery. Compatible with most Japanese and European vehicles. 18-month warranty included.",
-    "category": "Batteries",
+    "description": "Real-time GPS tracking for cars, motorcycles and trucks. Track your vehicle live on your phone, get instant alerts and recover it fast if stolen. Professional hidden installation included.",
+    "category": "GPS Trackers",
     "phone": "256757169673",
-    "image": ""
+    "image": "gps-trackers.jpg",
+    "gallery": ["gps-tracker-wiring.jpg"]
   },
   {
-    "id": "p002",
-    "name": "Engine Oil Filter",
-    "price": "25000",
+    "id": "s002",
+    "name": "Hikvision ColorVu CCTV Cameras",
+    "price": "",
     "currency": "UGX",
-    "description": "OEM-quality oil filter for 1.3L–2.0L petrol engines. Fits Toyota, Nissan, Honda. Prevents contaminants from damaging your engine.",
-    "category": "Engine Parts",
+    "description": "Genuine Hikvision ColorVu cameras — full-colour images even at night. IP and analog systems for homes, shops, offices and compounds, supplied and installed with clean cabling.",
+    "category": "CCTV Cameras",
     "phone": "256757169673",
-    "image": ""
+    "image": "hikvision-colorvu-shelf.jpg",
+    "gallery": ["hikvision-colorvu-stock.jpg", "cctv-bullet-install.jpg"]
   },
   {
-    "id": "p003",
-    "name": "Brake Pads — Front Set",
-    "price": "85000",
+    "id": "s003",
+    "name": "Hikvision Outdoor PTZ Camera",
+    "price": "",
     "currency": "UGX",
-    "description": "Ceramic front brake pads. Low dust, quiet operation. Fits Toyota Corolla, Caldina, Premio 2000–2020.",
-    "category": "Brakes",
+    "description": "Pan-tilt-zoom outdoor camera covering a wide area from one point. Ideal for gates, yards, parking and perimeter walls. Remote viewing on your phone.",
+    "category": "CCTV Cameras",
     "phone": "256757169673",
-    "image": ""
+    "image": "hikvision-ptz-camera.jpg"
   },
   {
-    "id": "p004",
-    "name": "Alternator 12V 90A",
-    "price": "320000",
+    "id": "s004",
+    "name": "Electric Fence Installation",
+    "price": "",
     "currency": "UGX",
-    "description": "Remanufactured alternator for Toyota 1NZ/2NZ engines. Fully tested. 6-month warranty included.",
-    "category": "Electrical",
+    "description": "Professional electric fence installation on perimeter walls for homes, schools and businesses. Strong deterrent with energiser, alarm and neat finishing. Contact us for a site visit and quotation.",
+    "category": "Electric Fence",
     "phone": "256757169673",
-    "image": ""
+    "image": "electric-fence-install-2.jpg",
+    "gallery": ["electric-fence-install.jpg", "electric-fence-install-3.jpg"]
   },
+
+  /* ── CAR ALARMS ───────────────────────────────────────────── */
   {
-    "id": "p005",
-    "name": "Radiator — Toyota Corolla",
-    "price": "250000",
+    "id": "a001",
+    "name": "Car Alarm Security System",
+    "price": "",
     "currency": "UGX",
-    "description": "Aluminium-core radiator for Toyota Corolla E120/E140. Direct OEM replacement. Excellent heat dissipation.",
-    "category": "Cooling System",
+    "description": "Complete car alarm with 2 remotes, siren, shock sensor and central-lock control. Loud siren when touched, one-click locking, door/boot/bonnet protection, auto-lock while driving and a car-finder button. Genuine, with guarantee and expert installation.",
+    "category": "Car Alarms",
     "phone": "256757169673",
-    "image": ""
+    "image": "car-alarm-system.jpg"
   },
+
+  /* ── SOLAR SYSTEMS ────────────────────────────────────────── */
   {
-    "id": "p006",
-    "name": "Shock Absorbers — Front Pair",
-    "price": "220000",
+    "id": "l001",
+    "name": "AOV 6K Smart Solar Camera — 3 Lens",
+    "price": "",
     "currency": "UGX",
-    "description": "Gas-charged front shock absorbers. Improved handling and comfort. Universal fit for Toyota Ipsum and RAV4.",
-    "category": "Suspension",
+    "description": "4G / Wi-Fi AI solar camera with three lenses (1 camera = 3 views), 24-hour continuous recording and colour night vision. No electricity needed — perfect for farms, sites and gates.",
+    "category": "Solar Cameras",
     "phone": "256757169673",
-    "image": ""
+    "image": "aov-solar-camera-2.jpg",
+    "gallery": ["aov-solar-camera.jpg", "solar-camera-rooftop.jpg", "solar-pole-camera-floodlight.jpg"]
   },
   {
-    "id": "p007",
-    "name": "Timing Belt Kit",
-    "price": "145000",
+    "id": "l002",
+    "name": "Blue Carbon Solar Flood Lights",
+    "price": "340000",
     "currency": "UGX",
-    "description": "Complete timing belt kit with tensioner and idler for 4AF/7AF Toyota engines. Genuine quality.",
-    "category": "Engine Parts",
+    "priceFrom": true,
+    "description": "Bright solar flood lights with separate solar panel and remote control. Available in 3 sizes — 1.0: UGX 340,000 · 2.0: UGX 390,000 · 3.0: UGX 400,000. Installation available.",
+    "category": "Solar Lighting",
     "phone": "256757169673",
-    "image": ""
+    "image": "blue-carbon-flood-lights.jpg",
+    "gallery": ["solar-flood-lights-stock.jpg", "solar-floodlight-pole.jpg"]
   },
   {
-    "id": "p008",
-    "name": "Air Filter — Universal",
-    "price": "18000",
+    "id": "l003",
+    "name": "Solar Street Light — 4 Module",
+    "price": "",
     "currency": "UGX",
-    "description": "High-flow performance air filter. Washable and reusable. Fits most 1.3L–2.5L engines.",
-    "category": "Filters",
+    "description": "High-power 4-module solar street light with dedicated panel and pole bracket. Lights compounds, gates and roads all night automatically. Supplied and installed.",
+    "category": "Solar Lighting",
     "phone": "256757169673",
-    "image": ""
+    "image": "solar-street-light-pole.jpg",
+    "gallery": ["solar-street-light-4-module.jpg", "solar-street-light-gate.jpg", "solar-street-light-install.jpg", "solar-street-light-camera.jpg", "solar-street-light-unit.jpg"]
   },
   {
-    "id": "p009",
-    "name": "Fuel Pump — Universal",
-    "price": "95000",
+    "id": "l004",
+    "name": "All-in-One Solar Street Light",
+    "price": "",
     "currency": "UGX",
-    "description": "In-tank electric fuel pump. Consistent fuel delivery under all conditions. Fits Nissan, Toyota, Mitsubishi.",
-    "category": "Fuel System",
+    "description": "Integrated panel, battery and LED in one unit. Easy pole mounting, zero electricity bills.",
+    "category": "Solar Lighting",
     "phone": "256757169673",
-    "image": ""
+    "image": "solar-street-light-all-in-one.jpg",
+    "gallery": ["led-street-light.jpg"]
   },
   {
-    "id": "p010",
-    "name": "Headlight Bulb H4 55W",
-    "price": "12000",
+    "id": "l005",
+    "name": "Solar Panels",
+    "price": "",
     "currency": "UGX",
-    "description": "Halogen H4 dual-beam headlight bulb. 12V 55/60W. Bright white light, long service life. Pair available.",
-    "category": "Electrical",
+    "description": "Quality solar panels in a range of sizes for homes, shops and security systems. Delivered and installed with correct mounting and wiring.",
+    "category": "Solar Systems",
     "phone": "256757169673",
-    "image": ""
+    "image": "solar-panel-delivery-3.jpg",
+    "gallery": ["solar-panel-delivery.jpg", "solar-panel-delivery-2.jpg"]
   },
   {
-    "id": "p011",
-    "name": "Clutch Plate Kit",
-    "price": "310000",
+    "id": "l006",
+    "name": "Solar Power System Installation",
+    "price": "",
     "currency": "UGX",
-    "description": "3-piece clutch kit (disc, cover, bearing) for Toyota Corolla 1.6L. OEM-spec for smooth engagement.",
-    "category": "Transmission",
-    "phone": "256757469374",
-    "image": ""
+    "description": "Complete solar power systems — panels, inverter and battery storage — sized to your home or business. Site assessment, installation and after-sale support.",
+    "category": "Solar Systems",
+    "phone": "256757169673",
+    "image": "solar-power-system.jpg"
+  },
+
+  /* ── CAR SCREENS & AUDIO ──────────────────────────────────── */
+  {
+    "id": "c001",
+    "name": "Android Tesla-Style Vertical Screen",
+    "price": "",
+    "currency": "UGX",
+    "description": "Large vertical Android head unit with GPS navigation, Bluetooth, YouTube, reverse camera support and climate display. Custom fit for Prado, Harrier and more. Professional installation.",
+    "category": "Car Screens",
+    "phone": "256757169673",
+    "image": "android-tesla-screen-prado.jpg",
+    "gallery": ["android-tesla-screen-prado-2.jpg", "android-tesla-screen-harrier.jpg"]
   },
   {
-    "id": "p012",
-    "name": "CV Joint — Front Outer",
-    "price": "130000",
+    "id": "c002",
+    "name": "Android Car Radio / Multimedia Screen",
+    "price": "",
     "currency": "UGX",
-    "description": "Front outer CV joint assembly with boot kit. For Toyota Corolla, Premio, Fielder. Eliminates clicking on turns.",
-    "category": "Drivetrain",
-    "phone": "256757469374",
-    "image": ""
+    "description": "9\" and 10\" Android screens with Apple CarPlay & Android Auto, Bluetooth, GPS, Wi-Fi and reverse camera input. Fitted with the correct dash frame for your car model.",
+    "category": "Car Screens",
+    "phone": "256757169673",
+    "image": "android-screens-boxed.jpg",
+    "gallery": ["android-screen-forester.jpg", "android-screen-allion.jpg", "android-screen-mercedes.jpg", "android-screen-hiace.jpg", "android-screen-xtrail.jpg", "android-multimedia-player-boxes.jpg"]
   },
   {
-    "id": "p013",
-    "name": "Power Steering Rack",
-    "price": "480000",
+    "id": "c003",
+    "name": "JBL GTO603 Coaxial Speakers",
+    "price": "",
     "currency": "UGX",
-    "description": "Remanufactured power steering rack for Toyota NZE 2003–2012. Full leak test. Direct bolt-on fitment.",
-    "category": "Steering",
-    "phone": "256757469374",
-    "image": ""
+    "description": "Genuine JBL Grand Touring series 6.5\" speakers — clear highs and punchy mids. Supplied with grilles and fitted into your doors professionally.",
+    "category": "Car Audio",
+    "phone": "256757169673",
+    "image": "jbl-gto603-speakers.jpg",
+    "gallery": ["jbl-door-speaker-install.jpg"]
   },
   {
-    "id": "p014",
-    "name": "ECU — Toyota 1NZ",
-    "price": "550000",
+    "id": "c004",
+    "name": "JBL BassPro Nano Under-Seat Subwoofer",
+    "price": "",
     "currency": "UGX",
-    "description": "Tested and verified ECU for Toyota 1NZ-FE engine. Plug and play replacement.",
-    "category": "Electronics",
-    "phone": "256757469374",
-    "image": ""
+    "description": "Compact powered subwoofer that fits under the seat — deep bass without losing boot space. Clean wiring and installation.",
+    "category": "Car Audio",
+    "phone": "256757169673",
+    "image": "jbl-basspro-nano-seat.jpg",
+    "gallery": ["jbl-basspro-nano.jpg", "jbl-basspro-subwoofers.jpg", "subwoofer-install.jpg"]
   },
   {
-    "id": "p015",
-    "name": "Wheel Bearing — Rear Hub",
-    "price": "65000",
+    "id": "c005",
+    "name": "Active Subwoofer Bass Box",
+    "price": "",
     "currency": "UGX",
-    "description": "Rear hub wheel bearing for Toyota Vitz/Yaris/Belta. Press-fit type. Eliminates humming noise on highways.",
-    "category": "Suspension",
-    "phone": "256757469374",
-    "image": ""
+    "description": "Powerful boot subwoofer in a ported enclosure for heavy, room-filling bass. Supplied and wired to your system.",
+    "category": "Car Audio",
+    "phone": "256757169673",
+    "image": "subwoofer-box-orange.jpg"
+  },
+
+  /* ── INTERIOR & CAR CARE ──────────────────────────────────── */
+  {
+    "id": "c006",
+    "name": "Premium Leather Car Seat Covers",
+    "price": "",
+    "currency": "UGX",
+    "description": "Full-set quilted leather seat covers with neck and back cushions. Available in black, black/red and other colours. Leather and wiring works done in-house.",
+    "category": "Seat Covers",
+    "phone": "256757169673",
+    "image": "seat-covers-black-red.jpg",
+    "gallery": ["seat-covers-black.jpg", "seat-covers-red.jpg"]
   },
   {
-    "id": "p016",
-    "name": "Water Pump — 7A Engine",
-    "price": "115000",
+    "id": "c007",
+    "name": "Cordless 48V Car Washer",
+    "price": "",
     "currency": "UGX",
-    "description": "Durable water pump for Toyota 7A-FE engine. Prevents overheating. Includes gasket.",
-    "category": "Cooling System",
-    "phone": "256757469374",
-    "image": ""
+    "description": "Portable high-pressure washer with 2 rechargeable 48V batteries, foam bottle, hose and carry case. Wash cars, bikes and compounds anywhere — no socket needed.",
+    "category": "Car Care",
+    "phone": "256757169673",
+    "image": "cordless-car-washer-promo.jpg",
+    "gallery": ["cordless-car-washer.jpg", "cordless-car-washer-kit.jpg", "cordless-car-washer-case.jpg", "cordless-car-washer-set.jpg", "cordless-car-washer-carry.jpg"]
   },
   {
-    "id": "p017",
-    "name": "Catalytic Converter",
-    "price": "380000",
+    "id": "c008",
+    "name": "Nano Double-Sided Tape",
+    "price": "",
     "currency": "UGX",
-    "description": "Universal fit catalytic converter for 1.3L–2.0L petrol engines. Reduces emissions, improves exhaust flow.",
-    "category": "Exhaust",
-    "phone": "256757469374",
-    "image": ""
-  },
-  {
-    "id": "p018",
-    "name": "Ignition Coil Set x4",
-    "price": "160000",
-    "currency": "UGX",
-    "description": "Set of 4 ignition coils for Toyota/Nissan 4-cylinder engines. Improves ignition performance and fuel economy.",
-    "category": "Engine Parts",
-    "phone": "256757469374",
-    "image": ""
-  },
-  {
-    "id": "p019",
-    "name": "Gearbox Mount",
-    "price": "35000",
-    "currency": "UGX",
-    "description": "Rubber gearbox mounting for Toyota NZE, IST, Runx. Reduces vibration and gear rattle.",
-    "category": "Transmission",
-    "phone": "256757469374",
-    "image": ""
-  },
-  {
-    "id": "p020",
-    "name": "Car AC Compressor",
-    "price": "650000",
-    "currency": "UGX",
-    "description": "Remanufactured AC compressor for Toyota Corolla 1.8L. Fully tested. 6-month warranty. Includes clutch.",
-    "category": "Air Conditioning",
-    "phone": "256757469374",
-    "image": ""
+    "description": "Transparent, reusable, washable nano grip tape. Mount phone holders, dash cams and accessories without screws or marks.",
+    "category": "Car Care",
+    "phone": "256757169673",
+    "image": "nano-tape.jpg"
   }
 ];
 
 /* Category icon map — Font Awesome class names */
 const CATEGORY_ICONS = {
-  "Batteries":       "fa-car-battery",
-  "Engine Parts":    "fa-gear",
-  "Brakes":          "fa-circle-stop",
-  "Electrical":      "fa-bolt",
-  "Cooling System":  "fa-temperature-half",
-  "Suspension":      "fa-car-bump",
-  "Transmission":    "fa-gears",
-  "Filters":         "fa-filter",
-  "Fuel System":     "fa-gas-pump",
-  "Steering":        "fa-circle-dot",
-  "Electronics":     "fa-microchip",
-  "Drivetrain":      "fa-arrows-spin",
-  "Exhaust":         "fa-wind",
-  "Air Conditioning":"fa-snowflake",
-  "default":         "fa-wrench"
+  "GPS Trackers":    "fa-location-crosshairs",
+  "CCTV Cameras":    "fa-video",
+  "Electric Fence":  "fa-bolt",
+  "Car Alarms":      "fa-bell",
+  "Solar Cameras":   "fa-solar-panel",
+  "Solar Lighting":  "fa-lightbulb",
+  "Solar Systems":   "fa-sun",
+  "Car Screens":     "fa-tablet-screen-button",
+  "Car Audio":       "fa-volume-high",
+  "Seat Covers":     "fa-couch",
+  "Car Care":        "fa-spray-can-sparkles",
+  "default":         "fa-screwdriver-wrench"
 };
