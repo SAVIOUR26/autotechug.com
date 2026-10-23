@@ -1,5 +1,5 @@
 /**
- * AutoTech UG — Main JavaScript
+ * OUTO TECH UG — Main JavaScript
  * Shop logic: render, filter, search, modals, gallery, WhatsApp ordering
  */
 (function () {
@@ -298,7 +298,7 @@
 
   /* ── WhatsApp message builder ────────────────────────────────── */
   function waMsg(name, phone, location, notes, product, service) {
-    let m = product ? `🛒 *New Order — AutoTech UG*\n\n` : `📋 *Quote Request — AutoTech UG*\n\n`;
+    let m = product ? `🛒 *New Order — OUTO TECH UG*\n\n` : `📋 *Quote Request — OUTO TECH UG*\n\n`;
     if (product) {
       m += `📦 *Product:* ${product.name}\n`;
       m += `💰 *Price:* ${priceText(product)}\n\n`;
