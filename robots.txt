@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /256757169673.txt
+Disallow: /+256
+
+Sitemap: https://autotechug.com/sitemap.xml

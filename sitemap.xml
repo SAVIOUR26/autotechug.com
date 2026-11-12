@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://autotechug.com/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image><image:loc>https://autotechug.com/images/og-image.jpg</image:loc></image:image>
+    <image:image><image:loc>https://autotechug.com/images/products/android-tesla-screen-prado.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://autotechug.com/security-systems-uganda.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://autotechug.com/images/products/hikvision-ptz-camera.jpg</image:loc></image:image>
+    <image:image><image:loc>https://autotechug.com/images/products/gps-trackers.jpg</image:loc></image:image>
+    <image:image><image:loc>https://autotechug.com/images/products/electric-fence-install-2.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://autotechug.com/fuel-monitoring-uganda.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://autotechug.com/images/products/fuel-sensors-installation.jpg</image:loc></image:image>
+    <image:image><image:loc>https://autotechug.com/images/products/fuel-monitoring-solution.jpg</image:loc></image:image>
+    <image:image><image:loc>https://autotechug.com/images/products/ble-fuel-level-sensor.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://autotechug.com/solar-installation-uganda.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://autotechug.com/images/products/solar-street-light-pole.jpg</image:loc></image:image>
+    <image:image><image:loc>https://autotechug.com/images/products/aov-solar-camera-2.jpg</image:loc></image:image>
+    <image:image><image:loc>https://autotechug.com/images/products/blue-carbon-flood-lights.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://autotechug.com/car-accessories-kampala.html</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image><image:loc>https://autotechug.com/images/products/android-tesla-screen-harrier.jpg</image:loc></image:image>
+    <image:image><image:loc>https://autotechug.com/images/products/car-alarm-system.jpg</image:loc></image:image>
+    <image:image><image:loc>https://autotechug.com/images/products/seat-covers-black-red.jpg</image:loc></image:image>
+  </url>
+</urlset>
