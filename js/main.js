@@ -286,6 +286,10 @@
   const workList  = workItems.map(w => ({ src: w.dataset.src, cap: w.dataset.cap }));
   workItems.forEach((w, i) => w.addEventListener('click', () => openLightbox(workList, i)));
 
+  /* Single images that open full-screen (e.g. the fuel monitoring diagram) */
+  document.querySelectorAll('[data-zoom]').forEach(z =>
+    z.addEventListener('click', () => openLightbox([{ src: z.dataset.zoom, cap: z.dataset.cap }], 0)));
+
   /* Swipe support for the lightbox on phones */
   let touchX = null;
   lightbox.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
@@ -365,12 +369,12 @@
   });
 
   /* Service cards: "View products" filters the shop to that division */
-  document.querySelectorAll('.btn-link[data-cats]').forEach(b => {
+  document.querySelectorAll('[data-cats]').forEach(b => {
     b.addEventListener('click', () => window.filterCat(b.dataset.cats.split(',')));
   });
 
   /* Service cards: "Get a Quote" pre-selects the division in the contact form */
-  document.querySelectorAll('.btn-quote[data-service]').forEach(b => {
+  document.querySelectorAll('[data-service]').forEach(b => {
     b.addEventListener('click', e => {
       e.preventDefault();
       const sel = $('orderService');

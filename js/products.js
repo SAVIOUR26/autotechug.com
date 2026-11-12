@@ -27,6 +27,40 @@ const PRODUCTS = [
     "image": "gps-trackers.jpg",
     "gallery": ["gps-tracker-wiring.jpg"]
   },
+
+  /* ── FUEL MONITORING ──────────────────────────────────────── */
+  {
+    "id": "f001",
+    "name": "Fuel Monitoring System — Sensor + GPS Tracker",
+    "price": "",
+    "currency": "UGX",
+    "description": "Complete fuel monitoring for trucks, buses, construction machinery and generators. A fuel level sensor and 4G GPS tracker send live fuel level, refills and sudden drops to the web platform and phone app, with alerts for suspected theft. Supplied, installed and calibrated by our team.",
+    "category": "Fuel Monitoring",
+    "phone": "256757169673",
+    "image": "fuel-monitoring-solution.jpg",
+    "gallery": ["fuel-sensors-installation.jpg", "fleet-dump-trucks.jpg", "fleet-concrete-mixers.jpg"]
+  },
+  {
+    "id": "f002",
+    "name": "Capacitive Fuel Level Sensor (RS232)",
+    "price": "",
+    "currency": "UGX",
+    "description": "Stainless steel capacitive probe with RS232 output, cut to your tank depth for accurate, stable readings. Works with metal and plastic tanks and connects to supported GPS trackers. Installation and calibration included.",
+    "category": "Fuel Monitoring",
+    "phone": "256757169673",
+    "image": "fuel-sensors-installation.jpg",
+    "gallery": ["fuel-monitoring-solution.jpg"]
+  },
+  {
+    "id": "f003",
+    "name": "Wireless BLE Fuel Level Sensor",
+    "price": "",
+    "currency": "UGX",
+    "description": "Compact tank-mounted fuel level sensor with Bluetooth (BLE) and RS232 output — fewer cables to run and a quick, clean installation. Pairs with supported GPS trackers for live fuel monitoring.",
+    "category": "Fuel Monitoring",
+    "phone": "256757169673",
+    "image": "ble-fuel-level-sensor.jpg"
+  },
   {
     "id": "s002",
     "name": "Hikvision ColorVu CCTV Cameras",
@@ -234,6 +268,7 @@ const PRODUCTS = [
 /* Category icon map — Font Awesome class names */
 const CATEGORY_ICONS = {
   "GPS Trackers":    "fa-location-crosshairs",
+  "Fuel Monitoring": "fa-gas-pump",
   "CCTV Cameras":    "fa-video",
   "Electric Fence":  "fa-bolt",
   "Car Alarms":      "fa-bell",
